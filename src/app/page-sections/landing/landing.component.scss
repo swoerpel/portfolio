@@ -1,0 +1,26 @@
+
+:host{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.title{
+    text-align: center;
+    color: var(--color-light);
+    padding-bottom: 1rem;
+}
+
+.break-line{
+    width: 50%;
+    transform: translateX(50%);
+    border-bottom: 3px solid var(--color-light);
+}
+
+.subtitle{
+    padding-top: 2rem;
+    text-align: center;
+    // letter-spacing: 1rem;
+    color: white;
+}

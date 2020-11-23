@@ -1,0 +1,88 @@
+
+// like HTML selector only higher specificity
+// global parent element
+$color-primary-dark: #4D3C30;
+$color-primary: #943436;
+$color-primary-light: #CBAA83;
+$color-primary-bright: #E6D0C8;
+$color-primary-accent: #B46239;
+
+:root {
+
+    --color-primary-dark: #4D3C30;
+    --color-primary: #943436;
+    --color-primary-light: #CBAA83;
+    --color-primary-bright: #E6D0C8;
+    --color-primary-accent: #B46239;
+
+    --color-dark: #000000;
+    --color-light: #FFFFFF;
+
+    --shadow-dark: 0 2rem 6rem rgba(0,0,0,0.5);
+    --shadow-light:  0 2rem 5rem rgba(0,0,0,.06);
+
+    --border: 2px solid var(--color-primary-dark);
+
+    --font-weight-light: 300;
+    --font-weight-heavy: 700;
+
+    --font-xs: 0.5rem;
+    --font-s: 1rem;
+    --font-m: 2rem;
+    --font-l: 3rem;
+    --font-xl: 5rem;
+    --font-xxl: 7rem;
+
+    --space-xxs: 0.5rem;
+    --space-xs: 1rem;
+    --space-s: 2rem;
+    --space-m: 3rem;
+    --space-l: 5rem;
+    --space-xl: 7rem;
+
+}
+
+$bp-largest: 75em;     // 1200px
+$bp-large: 68.75em;    // 1100px
+$bp-medium: 56.25em;   // 900px
+$bp-small: 37.5em;     // 600px
+$bp-smallest: 31.25em; // 500px
+
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
+html {
+    box-sizing: border-box;
+    font-size: 62.5%; //1 rem = 10px; 10px/16px = 62.5%
+    @media only screen and (max-width: $bp-large) {
+        font-size: 50%;
+    }
+}
+
+
+body { 
+    line-height: 1.6;
+    margin: 0; 
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-image: linear-gradient(
+        to right bottom,
+        rgba(black,0.0),
+        rgba(black,0.0),
+    ),
+    url('../assets/cover-image-medium-002.png');
+    height: 100vh;
+}
+
+
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

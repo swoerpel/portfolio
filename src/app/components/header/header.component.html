@@ -1,0 +1,25 @@
+<div class="navigation">
+    <div (click)="navOpen = !navOpen" class="navigation navigation__header">
+        <i class="fa fa-bars"></i>
+    </div>
+    <div *ngIf="navOpen" class="navigation navigation__list">
+        <li class="navigation__item">
+            <a href='#landing' (click)="onClick('landing')" class="title-large navigation__link">Home</a>
+        </li>
+        <li class="navigation__item">
+            <a href='#profile'(click)="onClick('profile')" class="title-large navigation__link">Profile</a>
+        </li>
+        <li class="navigation__item">
+            <a href='#experiences'(click)="onClick('experiences')" class="title-large navigation__link">Experiences</a>
+        </li>
+        <li class="navigation__item">
+            <a href='#abilities'(click)="onClick('abilities')" class="title-large navigation__link">Abilities</a>
+        </li>
+        <li class="navigation__item">
+            <a href='#projects'(click)="onClick('projects')" class="title-large navigation__link">Projects</a>
+        </li>
+        <li class="navigation__item">
+            <a href='#contact'(click)="onClick('contact')" class="title-large navigation__link">Contact</a>
+        </li>
+    </div>
+</div>
