@@ -7,6 +7,8 @@
     text-align: center;
 }
 
+
+
 .title{
     color: var(--color-primary-dark);
     text-align: center;
@@ -46,10 +48,7 @@
     }
 
     &__image{
-        flex: 0 0 1;
-        margin: 1rem var(--space-s);
-        display: flex;
-        justify-content: center;
+
     }
 
     &__details{

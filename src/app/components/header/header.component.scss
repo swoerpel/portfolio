@@ -18,29 +18,54 @@
         width: 100%;
         display: flex;
         flex-direction: column;
-        background-color: rgba(white,1);
+        background-size: cover;
+        background-image: linear-gradient(
+            to right bottom,
+            rgba(white,0.5),
+            rgba(white,0.5),
+        ),
+        url('../../../assets/wide-003.png');
         
         & > li{
             text-align: center;
             list-style-type: none;
-
-            & > a{
-                text-decoration: none;
-                color: var(--color-dark);
-                margin: 1rem 0;
-                cursor: pointer;
-                text-transform: uppercase;
-            }
         }
     }
+
+    &__link {
+        &:link,
+        &:visited {
+            color: var(--color-dark);
+            margin: 1rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            display: inline-block;
+            font-weight: 300;
+            text-decoration: none;
+            background-image: linear-gradient(120deg, transparent 0%, transparent 50%, black 50%);
+            background-size: 250%;
+            transition: all .4s;
+        }
+        
+        &:hover,
+        &:active {
+            background-position: 100%;
+            color: white;
+            transform: translateX(1rem);
+        }
+    }
+
 }
+
+
+
 .fa-bars {
     background-color: transparent;
-    font-size: var(--font-xxl);
-    margin: 2rem 4rem;
+    font-size: var(--font-xl);
+    margin: 1rem 2rem;
     cursor: pointer;
     position: fixed;
-    right: 2rem;
+    right: 1rem;
  
     z-index: 1000;
     top: 1rem;

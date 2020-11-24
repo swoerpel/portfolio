@@ -5,8 +5,8 @@
         rgba(white,0.50),
     ),
     url('../../../assets/wide-004.png');
-    background-size: cover;
-    background-repeat: no-repeat;
+    background-size: auto;
+    background-repeat: repeat;
     background-color: rgba(grey,0.8);
     display: flex;
     flex-direction: column;
@@ -14,32 +14,72 @@
 }
 
 .title{
-    color: var(--color-primary-dark);
+    // color: var(--color-primary-dark);
+    color: #1f2226;
 }
 
 .subtitle{
-    color: var(--color-primary-dark);
+    color: #d3c8a4;
 }
 
 
-.project{
-    width: 60%;
-    @media only screen and (max-width: 1200px) {
-        width: 80%;
-    }
-    @media only screen and (max-width: 600px) {
-        width: 100%;
-    }
 
-    background-color: rgba(white,1);
+.project{
+    width: 80%;
+    // @media only screen and (max-width: 1200px) {
+    // }
+    // @media only screen and (max-width: 600px) {
+    //     width: 100%;
+    // }
+
+    background-color: rgba(#1f2226,1);
     padding: 1rem;
 
+    display: flex;
+    flex-direction: column;
+
     &__description{
+        width: 100%;
+        flex: 1;
+        align-items: center;
         display: flex;
-        flex-direction: column;
     }
 
     &__images{
-
+        width: 100%;
+        display: grid;
+        justify-items: center;
+        grid-template-columns: repeat(auto-fill, minmax(33%, auto));
+        @media only screen and (max-width: 1000px) {
+            grid-template-columns: repeat(auto-fill, minmax(50%, auto));
+        }
+        @media only screen and (max-width: 750px) {
+            grid-template-columns: repeat(auto-fill, minmax(100%, auto));
+        }
     }
+}
+
+.img{
+    outline: 0.5rem solid #414c5a;
+    margin: 1rem;
+    width: 260px;
+    height: 260px;
+
+    &__maps{
+        width: 260px;
+        height: 325px;
+    }
+
+
+    @media only screen and (min-width: 1200px) {
+        width: 300px;
+        height: 300px;
+
+        &__maps{
+            width: 300px;
+            height: 375px;
+        }
+    }
+
+
 }
