@@ -21,11 +21,11 @@ let randPA = paletteNames[Math.floor(Math.random() * paletteNames.length)];
 let randPB = paletteNames[Math.floor(Math.random() * paletteNames.length)];
 
 export const colorPaletteNames: string[] = [
-    // randPA,
-    // randPB,
+    randPA,
+    randPB,
     // randPC,
     // 'rdylbu',
-    'animo'
+    // 'animo'
     // "Greys",
     // "Spectral",
     // "YlOrRd",
@@ -42,8 +42,8 @@ export const rotationParams = {
     values: [90,180]
 }
 export const gridDims: Dims = {
-    width:2,
-    height:2,
+    width:4,
+    height:4,
 }
 export const subGridDims: Point[] = [
     {x:1,y:1},
@@ -70,19 +70,19 @@ export const subGridScales: number[][] =
 
 export const subGridStarts: number[][] = [
     [0],
-    // [90],
-    // [180],
+    [90],
+    [180],
     // [270],
 ]
 export const subGridSteps: number[][] = [
-    // [15,30,45,60,75,90],
+    // [45,135],
     [90,180],
-    [90,180],
+    // [90,180],
 ]
 
 export const rotationOffsets: SliceOffsets[] = Array.from(
     {length: 20}, (_,i) => ({
-        startRotation: 0, 
+        startRotation: 45, 
         arcLength:0
     })
 );

@@ -13,7 +13,7 @@ export class InteractiveComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    
+    this.refresh.next();
   }
 
   refreshImage(){
