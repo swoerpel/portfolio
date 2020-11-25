@@ -14,6 +14,8 @@ import { LandingComponent } from './page-sections/landing/landing.component';
 import { ProfileComponent } from './page-sections/profile/profile.component';
 import { ProjectsComponent } from './page-sections/projects/projects.component';
 import { HeaderComponent } from './components/header/header.component';
+import { SketchComponent } from './components/sketch/sketch.component';
+import { InteractiveComponent } from './page-section/interactive/interactive.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +27,8 @@ import { HeaderComponent } from './components/header/header.component';
     AbilitiesComponent,
     ProjectsComponent,
     ContactComponent,
+    SketchComponent,
+    InteractiveComponent,
   ],
   imports: [
     BrowserModule,
