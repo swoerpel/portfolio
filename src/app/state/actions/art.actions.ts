@@ -6,8 +6,13 @@ export const NULL = createAction(
 )
 
 
-// // Map Display Widget
-// export const SetSelectedMapLocation = createAction(
-//     '[Explicit Map] Set Selected Map Location',
-//     // props<{location: MapLocation;}>()
-// )
+// Map Display Widget
+export const RefreshParams = createAction(
+    '[Art Action] Refresh Params',
+    props<{key: string;}>()
+)
+// Map Display Widget
+export const ParamsRefreshed = createAction(
+    '[Art Action] Params Refreshed',
+    props<{params: any;}>()
+)

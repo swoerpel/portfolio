@@ -1,7 +1,6 @@
 import { linSet } from "./sketch.helpers";
 import { Dims, Point, SliceOffsets } from "./sketch.models";
-
-export const paletteNames = ["OrRd","PuBu","BuPu","Oranges","BuGn","YlOrBr","YlGn","Reds","RdPu","Greens","YlGnBu","Purples","GnBu","Greys","YlOrRd","PuRd","Blues","PuBuGn","Viridis","Spectral","RdYlGn","RdBu","PiYG","PRGn","RdYlBu","BrBG","RdGy","PuOr","Set2","Accent","Set1","Set3","Dark2","Paired","Pastel2","Pastel1"];
+import { COLOR_PALETTE_NAMES } from '../../shared/constants';
 export const frameRate = 30;
 
 let len = 400;
@@ -19,9 +18,9 @@ export const defaultColors = {
 
 
 export const colorPaletteNames: string[] = [
-    paletteNames[Math.floor(Math.random() * paletteNames.length)],
-    paletteNames[Math.floor(Math.random() * paletteNames.length)],
-    paletteNames[Math.floor(Math.random() * paletteNames.length)],
+    COLOR_PALETTE_NAMES[Math.floor(Math.random() * COLOR_PALETTE_NAMES.length)],
+    COLOR_PALETTE_NAMES[Math.floor(Math.random() * COLOR_PALETTE_NAMES.length)],
+    COLOR_PALETTE_NAMES[Math.floor(Math.random() * COLOR_PALETTE_NAMES.length)],
     // 'rdylbu',
     // 'animo'
     // "Greys",
@@ -35,7 +34,7 @@ export const outlineParams = {
     width: 0.00,
     color: 'black'
 }
-export const rotationParams = {
+export const randomRotationParams = {
     randomize: false,
     values: [45,90,135]
 }

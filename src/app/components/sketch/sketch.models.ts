@@ -46,7 +46,7 @@ export interface GridParams{
 export interface SliceParams{
     offsets:SliceOffsets;
     outline: any;
-    rotation: any;
+    rotation?: any;
     scales: number[];
     starts: number[];
     steps: number[];

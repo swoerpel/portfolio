@@ -5,33 +5,39 @@ import {
     Dims, 
     GridParams, 
     PaletteConfig, 
+    Point, 
+    SliceOffsets, 
     SliceParams, 
     SubGridParams 
 } from './sketch.models';
-import { 
-    canvasDims, 
-    colorPaletteNames, 
-    gridDims, 
-    outlineParams, 
-    rotationOffsetFn, 
-    rotationParams, 
-    scalesFn, 
-    startsFn, 
-    stepsFn, 
-    subGridDimsFn, 
-} from './sketch.params';
 
 export class Aggregator {
 
+    private randomRotationParams = {
+        randomize: false,
+        values: [45,90,135]
+    };
+
     private color_palettes = {};
 
-    constructor() { }
+    constructor(
+        private gridDims: Dims,
+        private canvasDims: Dims,
+        private colorPaletteNames: string[],
+        private outlineParams: any,
+        private subGridDims: Point[],
+        private subGridScales: number[][],
+        private subGridStarts: number[][],
+        private subGridSteps: number[][],
+        private rotationOffsets:  SliceOffsets[],
+    ) { }
+
 
     public generateSubGridParams(): SubGridParams[]{
         let subGridParams: any = [];
         let index = 0;
-        for(let i = 0; i < gridDims.width; i++){
-            for(let j = 0; j < gridDims.height; j++){
+        for(let i = 0; i < this.gridDims.width; i++){
+            for(let j = 0; j < this.gridDims.height; j++){
                 subGridParams.push({
                     grid: this.toGridParams(i,j, index),
                     slice: this.toSliceParams(i,j,index)
@@ -44,10 +50,10 @@ export class Aggregator {
 
     public toGridParams(i,j,index):GridParams{
         let canvas: Dims = {
-            width: canvasDims.width / (gridDims.width),
-            height: canvasDims.height / (gridDims.height),
+            width: this.canvasDims.width / (this.gridDims.width),
+            height: this.canvasDims.height / (this.gridDims.height),
         }
-        let grid = subGridDimsFn(i,j,index)
+        let grid = this.subGridDimsFn(i,j,index)
         return {
             canvas,
             grid,
@@ -56,25 +62,28 @@ export class Aggregator {
                 height: canvas.height / grid.y,
             },
             origin:{
-                x: canvasDims.width * i / gridDims.width,
-                y: canvasDims.height * j / gridDims.height,
+                x: this.canvasDims.width * i / this.gridDims.width,
+                y: this.canvasDims.height * j / this.gridDims.height,
             }
         }
     }
 
     public toSliceParams(i,j,index): SliceParams{
         return {
-            offsets: {...rotationOffsetFn(i,j,index)},
-            outline: outlineParams,
-            rotation:(rotationParams.randomize) ? 
+            offsets: {...this.rotationOffsetFn(i,j,index)},
+            outline: this.outlineParams,
+
+            // need to be renamed to represent rotation
+            // slice offset is actually what this is setting
+            rotation:(this.randomRotationParams.randomize) ? 
             ({
-                randomize: rotationParams.randomize,
-                values: rotationParams.values
+                randomize: this.randomRotationParams.randomize,
+                values: this.randomRotationParams.values
             }) : 
-            ({randomizeRotation: rotationParams.randomize}),
-            scales: scalesFn(i,j,index),
-            starts: startsFn(i,j,index),
-            steps: stepsFn(i,j,index),
+            ({randomizeRotation: this.randomRotationParams.randomize}),
+            scales: this.scalesFn(i,j,index),
+            starts: this.startsFn(i,j,index),
+            steps: this.stepsFn(i,j,index),
         }
     }
 
@@ -88,7 +97,7 @@ export class Aggregator {
         }
         this.color_palettes = { ...this.color_palettes, ...chroma.brewer };
         // read palette config and create color_machines
-        return this.generatePaletteConfigs(colorPaletteNames,3).map((pk: PaletteConfig) => {
+        return this.generatePaletteConfigs(this.colorPaletteNames,3).map((pk: PaletteConfig) => {
             let key = pk.key;
             if(pk.key.toLowerCase() === 'random'){
                 let paletteNames: string[] = Object.keys(this.color_palettes);
@@ -110,5 +119,33 @@ export class Aggregator {
         }));
     }
 
+
+
+    // CONTROL FUNCTIONS====================================================
+    private subGridDimsFn = (i,j,index): Point=>{
+        // let dimIndex = Math.floor(Math.sqrt(i*i + j*j));
+        let dimIndex = Math.floor(Math.random() * this.subGridDims.length);
+        return this.subGridDims[dimIndex % this.subGridDims.length]; 
+    }
+    private scalesFn = (i,j,index): number[]=>{
+        // let hyp = Math.floor(Math.sqrt(i*i + j*j));
+        // let scaleIndex = Math.abs(
+        //     Math.floor(
+        //         Math.sin(-0.5* hyp) * subGridScales.length
+        //     )
+        // );
+        let scaleIndex = i;
+        return this.subGridScales[scaleIndex % this.subGridScales.length]
+    }
+    private startsFn = (i,j,index): number[]=>{
+        return this.subGridStarts[i % this.subGridStarts.length]
+    }
+    private stepsFn = (i,j,index): number[]=>{
+        return this.subGridSteps[i % this.subGridSteps.length]
+    }
+    private rotationOffsetFn = (i,j,index): SliceOffsets => {
+        let rotIndex = Math.floor(Math.random() * this.rotationOffsets.length);
+        return this.rotationOffsets[rotIndex % this.rotationOffsets.length];
+    }
 
 }

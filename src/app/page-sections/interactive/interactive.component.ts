@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
+import { ArtState } from 'src/app/state/art.reducer';
+import { Store } from '@ngrx/store';
+import { ArtActions } from 'src/app/state/actions';
 
 @Component({
   selector: 'app-interactive',
@@ -8,16 +11,15 @@ import { Subject } from 'rxjs';
 })
 export class InteractiveComponent implements OnInit {
 
-  public refresh: Subject<any> = new Subject();
 
-  constructor() { }
+  constructor(
+    private artStore: Store<ArtState>
+  ) { }
 
   ngOnInit(): void {
-    this.refresh.next();
+    // this.refresh.next();
   }
 
-  refreshImage(){
-    this.refresh.next();
-  }
+
 
 }
