@@ -6,24 +6,22 @@ export const frameRate = 30;
 
 let len = 400;
 export const canvasDims = {
-    width: len,
+    width: len*2,
     height: len,
     border: {
-        x: 0,
-        y: 0,
+        x: 20,
+        y: 20,
     }
 }
 export const defaultColors = {
     background: 'black'
 }
 
-let randPA = paletteNames[Math.floor(Math.random() * paletteNames.length)];
-let randPB = paletteNames[Math.floor(Math.random() * paletteNames.length)];
 
 export const colorPaletteNames: string[] = [
-    randPA,
-    randPB,
-    // randPC,
+    paletteNames[Math.floor(Math.random() * paletteNames.length)],
+    paletteNames[Math.floor(Math.random() * paletteNames.length)],
+    paletteNames[Math.floor(Math.random() * paletteNames.length)],
     // 'rdylbu',
     // 'animo'
     // "Greys",
@@ -39,50 +37,55 @@ export const outlineParams = {
 }
 export const rotationParams = {
     randomize: false,
-    values: [90,180]
+    values: [45,90,135]
 }
 export const gridDims: Dims = {
     width:4,
-    height:4,
+    height:2,
 }
 export const subGridDims: Point[] = [
     {x:1,y:1},
     {x:2,y:2},
-    // {x:3,y:3},
+    {x:4,y:4},
 ]
-// export const subGridScales: number[][] = [
-//     [1,.9,.8,.7,.6,.5,.4],
-//     // [Math.sqrt(2),1,1-(Math.sqrt(2)-1)],
-// ]
+export const subGridScales: number[][] = [
+    [1,.9,.8,.7,.6,.5,.4],
+    // [Math.sqrt(2),1,1-(Math.sqrt(2)-1)],
+]
 
 // ===========EXPERIMENTAL ARRAY GENERATION================
-let count = 1; // stays simple when kept at 1
-let start = 6;
-let cutoff = 0.1;
-export const subGridScales: number[][] = 
-    Array.from({length: count},(_,i)=>{
-        let l = i+start;
-        let s = 1/l;
-        l-=Math.floor(l*cutoff)
-        return Array.from({length: l},(_,j) =>(1-j*s))
-    });
+// let count = 1; // stays simple when kept at 1
+// let start = 3;
+// let cutoff = 0.1;
+// export const subGridScales: number[][] = 
+//     Array.from({length: count},(_,i)=>{
+//         let l = i+start;
+//         let s = 1/l;
+//         l-=Math.floor(l*cutoff)
+//         return Array.from({length: l},(_,j) =>(1-j*s))
+//     });
 // ========================================================
 
 export const subGridStarts: number[][] = [
-    [0],
-    [90],
-    [180],
+    [0,45,90],
+    [90,180],
+    [180,270],
     // [270],
 ]
 export const subGridSteps: number[][] = [
-    // [45,135],
-    [90,180],
+    [90,180,360],
+    [135],
+    [180],
+    [270],
+    [315],
+    [360],
+    // [90,180],
     // [90,180],
 ]
 
 export const rotationOffsets: SliceOffsets[] = Array.from(
     {length: 20}, (_,i) => ({
-        startRotation: 45, 
+        startRotation: 0, 
         arcLength:0
     })
 );

@@ -5,7 +5,6 @@ import { rotate, shuffle } from "./sketch.helpers";
 import { colorMachineIndexFn } from "./sketch.params";
 export class Lattice{
 
-    // private cellDims: Dims;
     private cellOrigins: Point[][];
     constructor(
         private graphic, 
@@ -16,43 +15,7 @@ export class Lattice{
         this.refreshCellOrigins();
     }
 
-
-    refreshCellOrigins(){
-        this.graphic.stroke(this.sliceParams.outline.color);
-        this.graphic.strokeWeight(this.gridParams.cell.width * this.sliceParams.outline.width)
-        this.cellOrigins = true ? this.generateShuffledCenters() : this.generateOrderedCenters();
-    }
-
-    generateShuffledCenters(){
-        let index = 0;
-        return shuffle(Array.from({length: this.gridParams.grid.x}, (_,i) => {
-            return shuffle(Array.from({length: this.gridParams.grid.y}, (_,j) => 
-                this.generateOrigin(i,j,index++)
-            ));
-        }));
-    }
-
-    generateOrderedCenters(){
-        let index = 0;
-        return Array.from({length: this.gridParams.grid.x}, (_,i) => {
-            return Array.from({length: this.gridParams.grid.y}, (_,j) => 
-                this.generateOrigin(i,j,index++)
-            );
-        });
-    }
-
-    generateOrigin = (i,j,index) => ({
-        x: i * this.gridParams.cell.width + 
-            this.gridParams.cell.width / 2 + 
-            this.gridParams.origin.x,
-        y: j * this.gridParams.cell.height + 
-            this.gridParams.cell.height / 2 +
-            this.gridParams.origin.y,
-        index,
-    });
-
-
-    drawNext(latticeIndex: number){
+    public drawNext(latticeIndex: number){
         this.refreshCellOrigins();
         let colorMachineIndex = 0;
         // should send scales in here
@@ -91,7 +54,7 @@ export class Lattice{
         
     }
     
-    drawSlice(cell: Cell): void{
+    private drawSlice(cell: Cell): void{
         let slice = this.generateSlicePoints(cell);
         this.graphic.fill(cell.color)
         this.graphic.beginShape();
@@ -102,7 +65,7 @@ export class Lattice{
         }
     }
 
-    generateSlicePoints({dims,rotation,center}: Cell): Point[]{
+    private generateSlicePoints({dims,rotation,center}: Cell): Point[]{
         let pointCount = 120;
         let step: number = rotation.stepRad / pointCount;
         let arc: Point[] = Array.from({length: pointCount + 1}, (_,i) => ({
@@ -114,21 +77,7 @@ export class Lattice{
         return arc
     }
 
-
-    drawDebugPoints(slice: Point[]): void {
-        this.graphic.textSize(120)
-        this.graphic.textAlign('center', 'center')
-        slice.forEach((p: Point, i: number)=> {
-            this.graphic.stroke('white');
-            this.graphic.strokeWeight(4);
-            this.graphic.text(i.toString(), p.x,p.y)
-            this.graphic.stroke(chroma.color('white').hex());
-            this.graphic.strokeWeight(20);
-            this.graphic.point(p.x,p.y)
-        });
-    }
-
-    createRotation(i,j,d): Rotation{
+    private createRotation(i,j,d): Rotation{
         if(this.sliceParams.rotation.randomize){
             return this.generateRandRotation();
         }
@@ -141,7 +90,7 @@ export class Lattice{
         return this.generateRotation(startAngle,arcLength)
     }
 
-    generateRotation(startAngle: number, arcLength: number): Rotation{
+    private generateRotation(startAngle: number, arcLength: number): Rotation{
         return {
             startDeg: startAngle,
             stepDeg: arcLength,
@@ -150,7 +99,7 @@ export class Lattice{
         }
     }
 
-    generateRandRotation(): Rotation{
+    private generateRandRotation(): Rotation{
         let rId1 = Math.floor(Math.random() * this.sliceParams.rotation.values.length);
         let rId2 = Math.floor(Math.random() * this.sliceParams.rotation.values.length);
         let r1 = this.sliceParams.rotation.values[rId1];
@@ -162,6 +111,58 @@ export class Lattice{
             stepRad: (r1 + r2) * Math.PI / 180,
         }
     }
+
+    private refreshCellOrigins(){
+        this.graphic.stroke(this.sliceParams.outline.color);
+        this.graphic.strokeWeight(this.gridParams.cell.width * this.sliceParams.outline.width)
+        this.cellOrigins = true ? this.generateShuffledCenters() : this.generateOrderedCenters();
+    }
+
+    private generateShuffledCenters(){
+        let index = 0;
+        return shuffle(Array.from({length: this.gridParams.grid.x}, (_,i) => {
+            return shuffle(Array.from({length: this.gridParams.grid.y}, (_,j) => 
+                this.generateOrigin(i,j,index++)
+            ));
+        }));
+    }
+
+    private generateOrderedCenters(){
+        let index = 0;
+        return Array.from({length: this.gridParams.grid.x}, (_,i) => {
+            return Array.from({length: this.gridParams.grid.y}, (_,j) => 
+                this.generateOrigin(i,j,index++)
+            );
+        });
+    }
+
+    private generateOrigin = (i,j,index) => ({
+        x: i * this.gridParams.cell.width + 
+            this.gridParams.cell.width / 2 + 
+            this.gridParams.origin.x,
+        y: j * this.gridParams.cell.height + 
+            this.gridParams.cell.height / 2 +
+            this.gridParams.origin.y,
+        index,
+    });
+
+    private drawDebugPoints(slice: Point[]): void {
+        this.graphic.textSize(120)
+        this.graphic.textAlign('center', 'center')
+        slice.forEach((p: Point, i: number)=> {
+            this.graphic.stroke('white');
+            this.graphic.strokeWeight(4);
+            this.graphic.text(i.toString(), p.x,p.y)
+            this.graphic.stroke(chroma.color('white').hex());
+            this.graphic.strokeWeight(20);
+            this.graphic.point(p.x,p.y)
+        });
+    }
+
+
+
+ 
+
 
   
 

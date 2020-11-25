@@ -8,9 +8,7 @@
 }
 
 .sketch{
-    width: 400px;
-    height: 400px;
     &:active{
-        transform: translateY(5px);
+        transform: translateY(3px);
     }
 }

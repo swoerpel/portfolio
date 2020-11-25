@@ -1,21 +1,24 @@
-import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
 import * as p5 from 'p5';
-import { Renderer } from 'p5';
-import { generate, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
+import { ArtState } from 'src/app/state/art.reducer';
 import { Aggregator } from './sketch.aggregator';
 import { Lattice } from './sketch.lattice';
 import { canvasDims, defaultColors, frameRate } from './sketch.params';
 
+
 @Component({
   selector: 'app-sketch',
-  templateUrl: './sketch.component.html',
-  styleUrls: ['./sketch.component.scss']
+  template: `<div id="sketch-container"></div>`,
 })
 export class SketchComponent implements OnInit {
 
   @Input() refresh: Subject<any>;
   private prevSketch: any;
-  constructor() { }
+  constructor(
+    private artStore: Store<ArtState>
+  ) { }
 
   ngOnInit() {
     this.generate();

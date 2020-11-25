@@ -27,7 +27,7 @@ export class Aggregator {
 
     constructor() { }
 
-    generateSubGridParams(): SubGridParams[]{
+    public generateSubGridParams(): SubGridParams[]{
         let subGridParams: any = [];
         let index = 0;
         for(let i = 0; i < gridDims.width; i++){
@@ -71,7 +71,7 @@ export class Aggregator {
                 randomize: rotationParams.randomize,
                 values: rotationParams.values
             }) : 
-            ({randomizeRoataion: rotationParams.randomize}),
+            ({randomizeRotation: rotationParams.randomize}),
             scales: scalesFn(i,j,index),
             starts: startsFn(i,j,index),
             steps: stepsFn(i,j,index),
